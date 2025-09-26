@@ -1,5 +1,5 @@
 # Deploy Carnivorous Green House
-![Carnivorous Green House](./greenhouse/main/static/index_image.png)
+![Carnivorous Green House](./main/static/index_image.png)
 
 ## Features
  - user_service (python-port 5001)
@@ -13,4 +13,5 @@
 ## Requires
  - Containerzed for all services
  - Deploying "Green House" to server use docker compose
+
  - Create CI/CD for each service 
