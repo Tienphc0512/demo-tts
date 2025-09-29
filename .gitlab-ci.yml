@@ -54,11 +54,7 @@ build_main:
 deploy:
   stage: deploy
   before_script:
-    - 'which ssh-agent || (apt-get update -y && apt-get install openssh-client -y)'
-    - eval $(ssh-agent -s)
-    - echo "$SSH_PRIVATE_KEY" | base64 -d | ssh-add -
-    - mkdir -p ~/.ssh
-    - chmod 400 ~/.ssh 
-    - ssh-keyscan -H 35.247.188.150 >> ~/.ssh/known_hosts
+    - apt install -y openssh-client
+    - chmod 400 $SSH_PRIVATE_KEY_FILE
   script:
-    - ssh phengtin0512@35.247.188.150 "cd ~/greenhouse && docker-compose pull && docker-compose up -d"
+    - ssh -i $SSH_PRIVATE_KEY_FILE -o StrictHostKeyChecking=no phengtin0512@35.247.188.150 "cd ~/greenhouse && docker-compose pull && docker-compose up -d"
