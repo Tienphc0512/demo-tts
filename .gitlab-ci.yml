@@ -35,11 +35,11 @@ build_bug_service:
     - docker build -t registry.gitlab.com/tienpham/greenhouse-lab/bug_service:latest ./bug_service
     - docker push registry.gitlab.com/tienpham/greenhouse-lab/bug_service:latest
 
-build_main_app:
+build_main:
   stage: build
   script:
-    - docker build -t registry.gitlab.com/tienpham/greenhouse-lab/main_app:latest ./main
-    - docker push registry.gitlab.com/tienpham/greenhouse-lab/main_app:latest
+    - docker build -t registry.gitlab.com/tienpham/greenhouse-lab/main:latest ./main
+    - docker push registry.gitlab.com/tienpham/greenhouse-lab/main:latest
 
 deploy:
   stage: deploy
