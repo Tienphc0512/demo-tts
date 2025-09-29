@@ -53,7 +53,12 @@ build_main:
 
 deploy:
   stage: deploy
-  script:
+  before_script:
+    - 'which ssh-agent || (apt-get update -y && apt-get install openssh-client -y)'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
     - mkdir -p ~/.ssh
+    - chmod 750 ~/.ssh 
     - ssh-keyscan -H 35.247.188.150 >> ~/.ssh/known_hosts
+  script:
     - ssh phengtin0512@35.247.188.150 "cd ~/greenhouse && docker-compose pull && docker-compose up -d"
