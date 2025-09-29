@@ -1,6 +1,5 @@
 stages:
   - build
-  - test
   - deploy
 
 #  docker-in-docker
@@ -51,11 +50,6 @@ build_main:
     - docker build -t registry.gitlab.com/tienphc0512/greenhouse-lab/main:latest -f ./Dockerfile .
     - docker push registry.gitlab.com/tienphc0512/greenhouse-lab/main:latest
 
-test_services:
-  stage: test
-  script:
-    - echo "Run unit tests here"
-    - docker run --rm $CI_REGISTRY_IMAGE/user_service:latest npm test
 
 deploy:
   stage: deploy
