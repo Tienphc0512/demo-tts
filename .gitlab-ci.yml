@@ -17,38 +17,38 @@ before_script:
 build_user_service:
   stage: build
   script:
-    - docker build -t registry.gitlab.com/tienphan0512/greenhouse-lab/user_service:latest -f ./user_service/Dockerfile .
-    - docker push registry.gitlab.com/tienphan0512/greenhouse-lab/user_service:latest
+    - docker build -t registry.gitlab.com/tienphc0512/greenhouse-lab/user_service:latest -f ./user_service/Dockerfile .
+    - docker push registry.gitlab.com/tienphc0512/greenhouse-lab/user_service:latest
 
 build_plant_service:
   stage: build
   script:
-    - docker build -t registry.gitlab.com/tienphan0512/greenhouse-lab/plant_service:latest -f ./plant_service/Dockerfile .
-    - docker push registry.gitlab.com/tienphan0512/greenhouse-lab/plant_service:latest
+    - docker build -t registry.gitlab.com/tienphc0512/greenhouse-lab/plant_service:latest -f ./plant_service/Dockerfile .
+    - docker push registry.gitlab.com/tienphc0512/greenhouse-lab/plant_service:latest
 
 build_simulation_service:
   stage: build
   script:
-    - docker build -t registry.gitlab.com/tienphan0512/greenhouse-lab/simulation_service:latest -f ./simulation_service/Dockerfile .
-    - docker push registry.gitlab.com/tienphan0512/greenhouse-lab/simulation_service:latest
+    - docker build -t registry.gitlab.com/tienphc0512/greenhouse-lab/simulation_service:latest -f ./simulation_service/Dockerfile .
+    - docker push registry.gitlab.com/tienphc0512/greenhouse-lab/simulation_service:latest
 
 build_websocket_service:
   stage: build
   script:
-    - docker build -t registry.gitlab.com/tienphan0512/greenhouse-lab/websocket_service:latest -f ./websocket_service/Dockerfile .
-    - docker push registry.gitlab.com/tienphan0512/greenhouse-lab/websocket_service:latest
+    - docker build -t registry.gitlab.com/tienphc0512/greenhouse-lab/websocket_service:latest -f ./websocket_service/Dockerfile .
+    - docker push registry.gitlab.com/tienphc0512/greenhouse-lab/websocket_service:latest
 
 build_bug_service:
   stage: build
   script:
-    - docker build -t registry.gitlab.com/tienphan0512/greenhouse-lab/bug_service:latest -f ./bug_service/Dockerfile .
-    - docker push registry.gitlab.com/tienphan0512/greenhouse-lab/bug_service:latest
+    - docker build -t registry.gitlab.com/tienphc0512/greenhouse-lab/bug_service:latest -f ./bug_service/Dockerfile .
+    - docker push registry.gitlab.com/tienphc0512/greenhouse-lab/bug_service:latest
 
 build_main:
   stage: build
   script:
-    - docker build -t registry.gitlab.com/tienphan0512/greenhouse-lab/main:latest -f ./Dockerfile .
-    - docker push registry.gitlab.com/tienphan0512/greenhouse-lab/main:latest
+    - docker build -t registry.gitlab.com/tienphc0512/greenhouse-lab/main:latest -f ./Dockerfile .
+    - docker push registry.gitlab.com/tienphc0512/greenhouse-lab/main:latest
 
 
 deploy:
