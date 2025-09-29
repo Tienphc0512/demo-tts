@@ -15,3 +15,6 @@
  - Deploying "Green House" to server use docker compose
 
  - Create CI/CD for each service 
+
+## Kết quả triển khai
+![Kết quả](./screenshot.png)
