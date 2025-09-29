@@ -58,5 +58,6 @@ deploy:
     - apt-get update
     - apt-get install -y openssh-client
     - chmod 400 $SSH_PRIVATE_KEY
+    - docker login registry.gitlab.com -u Tienphc0512 -p glft-2-FzE6mQuKSsrG9R7fCx
   script:
     - ssh -i $SSH_PRIVATE_KEY -o StrictHostKeyChecking=no phengtin0512@35.247.188.150 "cd ~/greenhouse-lab && docker-compose pull && docker-compose up -d"
