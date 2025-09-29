@@ -1,5 +1,6 @@
 stages:
   - build
+  - test
   - deploy
 
 #  docker-in-docker
@@ -50,15 +51,20 @@ build_main:
     - docker build -t registry.gitlab.com/tienphc0512/greenhouse-lab/main:latest -f ./Dockerfile .
     - docker push registry.gitlab.com/tienphc0512/greenhouse-lab/main:latest
 
+test_services:
+  stage: test
+  script:
+    - echo "Run unit tests here"
+    - docker run --rm $CI_REGISTRY_IMAGE/user_service:latest npm test
 
 deploy:
   stage: deploy
   before_script:
     - 'which ssh-agent || (apt-get update -y && apt-get install openssh-client -y)'
     - eval $(ssh-agent -s)
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - echo "$SSH_PRIVATE_KEY" | base64 -d | ssh-add -
     - mkdir -p ~/.ssh
-    - chmod 750 ~/.ssh 
+    - chmod 700 ~/.ssh 
     - ssh-keyscan -H 35.247.188.150 >> ~/.ssh/known_hosts
   script:
     - ssh phengtin0512@35.247.188.150 "cd ~/greenhouse && docker-compose pull && docker-compose up -d"
