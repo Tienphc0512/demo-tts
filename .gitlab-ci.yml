@@ -61,4 +61,4 @@ deploy:
    
   script:
     - ssh -i $SSH_PRIVATE_KEY -o StrictHostKeyChecking=no phengtin0512@35.247.188.150 "echo "glpat-6XTstW_JkZvb00b7MqySB286MQp1Omk0aWNxCw.01.120yy913k" | docker login --username Tienphc0512 registry.gitlab.com  --password-stdin"
-    - ssh -i $SSH_PRIVATE_KEY -o StrictHostKeyChecking=no phengtin0512@35.247.188.150 "cd ~/greenhouse-lab && docker-compose pull && docker-compose up -d"
+    - ssh -i $SSH_PRIVATE_KEY -o StrictHostKeyChecking=no phengtin0512@35.247.188.150 "cd ~/greenhouse-lab && docker compose pull && docker compose up -d"
