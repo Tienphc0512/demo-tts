@@ -54,7 +54,7 @@ build_main:
 deploy:
   stage: deploy
   before_script:
-    - apt install -y openssh-client
+    - apt-get install -y openssh-client
     - chmod 400 $SSH_PRIVATE_KEY_FILE
   script:
     - ssh -i $SSH_PRIVATE_KEY_FILE -o StrictHostKeyChecking=no phengtin0512@35.247.188.150 "cd ~/greenhouse && docker-compose pull && docker-compose up -d"
