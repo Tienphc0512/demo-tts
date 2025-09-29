@@ -4,7 +4,7 @@ FROM python:3.12-slim
 WORKDIR /app
 
 # Copy requirements chung
-COPY ../requirements.txt .
+COPY requirements.txt .
 
 # Cài dependencies
 RUN pip install --no-cache-dir -r requirements.txt
