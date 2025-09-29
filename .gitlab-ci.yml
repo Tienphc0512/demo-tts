@@ -54,4 +54,4 @@ build_main:
 deploy:
   stage: deploy
   script:
-    - ssh phengtin0512@35.198.252.247 "cd ~/greenhouse && docker-compose pull && docker-compose up -d"
+    - ssh phengtin0512@35.247.188.150 "cd ~/greenhouse && docker-compose pull && docker-compose up -d"
