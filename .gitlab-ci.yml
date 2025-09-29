@@ -54,4 +54,6 @@ build_main:
 deploy:
   stage: deploy
   script:
+    - mkdir -p ~/.ssh
+    - ssh-keyscan -H 35.247.188.150 >> ~/.ssh/known_hosts
     - ssh phengtin0512@35.247.188.150 "cd ~/greenhouse && docker-compose pull && docker-compose up -d"
