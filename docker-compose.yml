@@ -6,17 +6,19 @@ services:
     ports:
       - "5001:5001"
     depends_on:
-      - db
-    restart: unless-stopped
-
+    db:
+      condition: service_healthy
+  restart: unless-stopped
+  
   plant_service:
     image: registry.gitlab.com/tienphc0512/greenhouse-lab/plant_service:latest
     ports:
       - "5002:5002"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     restart: unless-stopped
-
+    
   simulation_service:
     image: registry.gitlab.com/tienphc0512/greenhouse-lab/simulation_service:latest
     ports:
