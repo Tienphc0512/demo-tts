@@ -5,8 +5,7 @@ services:
     ports:
       - "5001:5001"
     depends_on:
-      db:
-        condition: service_healthy
+      - db
     restart: unless-stopped
   
   plant_service:
@@ -14,8 +13,7 @@ services:
     ports:
       - "5002:5002"
     depends_on:
-      db:
-        condition: service_healthy
+      - db
     restart: unless-stopped
 
   simulation_service:
