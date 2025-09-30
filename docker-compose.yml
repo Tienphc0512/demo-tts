@@ -1,14 +1,13 @@
 version: '3'
-
 services:
   user_service:
     image: registry.gitlab.com/tienphc0512/greenhouse-lab/user_service:latest
     ports:
       - "5001:5001"
     depends_on:
-    db:
-      condition: service_healthy
-  restart: unless-stopped
+      db:
+        condition: service_healthy
+    restart: unless-stopped
   
   plant_service:
     image: registry.gitlab.com/tienphc0512/greenhouse-lab/plant_service:latest
@@ -18,7 +17,7 @@ services:
       db:
         condition: service_healthy
     restart: unless-stopped
-    
+
   simulation_service:
     image: registry.gitlab.com/tienphc0512/greenhouse-lab/simulation_service:latest
     ports:
