@@ -19,10 +19,18 @@
 ## Kết quả triển khai
 
 ### Containers đang chạy
-![docker-ps](images/docker-ps.png)
+![docker-ps](./result/docker-ps.jpg)
 
-### Response từ main_app
-![curl-main-app](images/curl-main-app.png)
+### Response từ main_app/signup, /login, /dashboard
+![curl-main-app](./result/signup.jpg)
+![curl-main-app](./result/login.jpg)
+![curl-main-app](./result/dashboard.jpg)
 
 ### Pipeline CI/CD
-![pipeline-success](images/pipeline.png)
+![pipeline-success](./result/deployjob.jpg)
+
+### Hình ảnh web 
+![deploy-success](./result/main.jpg)
+![deploy-success](./result/loginweb.jpg)
+![deploy-success](./result/signupweb.jpg)
+![deploy-success](./result/dashboardweb.jpg)
