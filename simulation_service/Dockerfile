@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
     
 # Copy requirements chung
-COPY ../requirements.txt .
+COPY ./requirements.txt /app/
 
 # Cài dependencies
 RUN pip install --no-cache-dir -r requirements.txt
@@ -23,4 +23,4 @@ COPY . .
 EXPOSE 5003
 
 # Chạy service 
-CMD ["python", "simulation_service.py"]
+CMD ["python", "simulation_service/simulation_service.py"]

@@ -17,4 +17,12 @@
  - Create CI/CD for each service 
 
 ## Kết quả triển khai
-![Kết quả](./screenshot.png)
+
+### Containers đang chạy
+![docker-ps](images/docker-ps.png)
+
+### Response từ main_app
+![curl-main-app](images/curl-main-app.png)
+
+### Pipeline CI/CD
+![pipeline-success](images/pipeline.png)

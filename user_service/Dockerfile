@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
     
 # Copy requirements chung
-COPY ../requirements.txt .
+COPY ./requirements.txt /app/
 
 # Cài dependencies
 RUN pip install --no-cache-dir -r requirements.txt
@@ -23,4 +23,4 @@ COPY . .
 EXPOSE 5001
 
 # Chạy service 
-CMD ["python", "user_service.py"]
+CMD ["python", "user_service/user_service.py"]
