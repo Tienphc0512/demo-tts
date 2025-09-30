@@ -59,12 +59,12 @@ def get_plants(user_id):
         'health_data': plant.health_data
     } for plant in plants])
 
-@app.route('/trigger_bug', methods=['GET'])
-def bug():
-    logging.error("Triggering bug...")
-    global BUGS
-    BUGS = True
-    return "Bug triggered", 200
+# @app.route('/trigger_bug', methods=['GET'])
+# def bug():
+#     logging.error("Triggering bug...")
+#     global BUGS
+#     BUGS = True
+#     return "Bug triggered", 200
 
 
 if __name__ == '__main__':
