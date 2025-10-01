@@ -4,12 +4,12 @@ from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import logging
 import requests
-
+import os
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://user:password@db:5432/plant_service_db'
+app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}@{os.getenv('DB_HOST')}:5432/plant_service_db"
 db = SQLAlchemy(app)
 
-SIMULATION_SERVICE_URL = 'http://simulation_service:5003'
+SIMULATION_SERVICE_URL = f"{os.getenv('SIMULATION_URL')}"
 BUGS = False
 
 class Plant(db.Model):

@@ -3,15 +3,15 @@
 from flask import Flask, render_template, session, redirect, url_for, request, jsonify
 import requests
 import logging
-
+import os
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'plantsarecool1234'
 
-USER_SERVICE_URL = 'http://user_service:5001'
-PLANT_SERVICE_URL = 'http://plant_service:5002'
-SIMULATION_SERVICE_URL = 'http://simulation_service:5003'
-WEBSOCKET_SERVICE_URL = 'http://websocket_service:5004'
-BUG_SERVICE_URL = 'http://bug_service:5010'
+USER_SERVICE_URL = f"{os.getenv('USER_URL')}"
+PLANT_SERVICE_URL = f"{os.getenv('PLAN_URL')}"
+SIMULATION_SERVICE_URL = f"{os.getenv('SIMULATION_URL')}"
+WEBSOCKET_SERVICE_URL =  f"{os.getenv('WEBSOCKET_URL')}"
+BUG_SERVICE_URL =  f"{os.getenv('BUG_URL')}"
 
 @app.route('/')
 def index():

@@ -4,11 +4,15 @@ from flask import Flask, request, session, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 import logging
+import os
 from sqlalchemy.exc import IntegrityError
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'plantsarecool1234'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://user:password@db:5432/user_service_db'
+app.config['SQLALCHEMY_DATABASE_URI'] = (
+    f"postgresql://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}"
+    f"@{os.getenv('DB_HOST')}:5432/user_service_db"
+)
 db = SQLAlchemy(app)
 
 BUGS = False

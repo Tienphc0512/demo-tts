@@ -6,14 +6,14 @@ import logging
 from flask_socketio import SocketIO, emit, join_room, leave_room
 import requests
 import threading
-
+import os
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'plantsarecool1234'
 socketio = SocketIO(app, cors_allowed_origins="*", engineio_logger=True)
 
 BUGS = False
 
-PLANT_SERVICE_URL = 'http://plant_service:5002'
+PLANT_SERVICE_URL = f"{os.getenv('PLANT_URL')}"
 
 active_users = {}
 simulation_threads = {}

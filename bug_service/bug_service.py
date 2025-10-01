@@ -6,15 +6,15 @@ import requests
 import threading
 import time
 import logging
-
+import os
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'bugsarebad1234'
 
 SERVICES = [
-    'http://user_service:5001',
-    'http://plant_service:5002',
-    'http://simulation_service:5003',
-    'http://websocket_service:5004'
+    f"{os.getenv('USER_URL')}",
+    f"{os.getenv('PLAN_URL')}",
+    f"{os.getenv('SIMULATION_URL')}",
+    f"{os.getenv('WEBSOCKET_URL')}"
 ]
 
 bug_mode = False

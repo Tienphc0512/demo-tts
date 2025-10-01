@@ -1,37 +1,71 @@
-version: '3'
-
 services:
   user_service:
-   
+    image: 
+    environment:
+      DB_HOST: 
+      DB_USER: 
+      DB_PASSWORD: 
+    ports:
+      - 5001:5001
     depends_on:
       - db
     restart: unless-stopped
 
   plant_service:
-   
+    image: 
+    environment:
+      SIMULATION_URL: 
+      DB_HOST: 
+      DB_USER: 
+      DB_PASSWORD: 
+    ports:
+      - 5002:5002
     depends_on:
       - db
     restart: unless-stopped
 
   simulation_service:
-   
+    image: 
+    environment:
+      PLANT_URL: 
+    ports:
+      - 5003:5003
     depends_on:
       - db
       - plant_service
     restart: unless-stopped
 
   websocket_service:
-    
+    image: websocket
+    environment:
+      PLANT_URL: 
+    ports:
+      - 5004:5004
     restart: unless-stopped
   
   bug_service:
-   
+    image: bug
+    environment:
+      USER_URL: 
+      PLAN_URL: 
+      SIMULATION_URL: 
+      WEBSOCKET_URL: 
+    ports:
+      - 5010:5010
     depends_on:
       - db
     restart: unless-stopped
 
   main_app:
-     
+    image: main
+    environment:
+      USER_URL: 
+      PLAN_URL:
+      SIMULATION_URL: 
+      WEBSOCKET_URL: 
+      BUG_URL: 
+    ports:
+      - 3000:5000
     depends_on:
       - user_service
       - plant_service
