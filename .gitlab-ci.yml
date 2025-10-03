@@ -16,8 +16,8 @@ before_script:
 build_user_service:
   stage: build
   script:
-    - docker build -t registry.gitlab.com/tienphc0512/greenhouse-lab/user_service:latest -f ./user_service/Dockerfile .
-    - docker push registry.gitlab.com/tienphc0512/greenhouse-lab/user_service:latest
+    - docker build -t registry.gitlab.com/tienphc0512/greenhouse-labv2/user_service:latest -f ./user_service/Dockerfile .
+    - docker push registry.gitlab.com/tienphc0512/greenhouse-labv2/user_service:latest
   rules:
     - changes: # và nếu là nhánh main thì chỉ chạy khi có thay đổi trong thư mục user_service
         - user_service/*
@@ -161,8 +161,8 @@ deploy_bug_service:
 build_main_app:
   stage: build
   script:
-    - docker build -t registry.gitlab.com/tienphc0512/greenhouse-lab/main:latest -f ./Dockerfile .
-    - docker push registry.gitlab.com/tienphc0512/greenhouse-lab/main:latest
+    - docker build -t registry.gitlab.com/tienphc0512/greenhouse-labv2/main:latest -f ./Dockerfile .
+    - docker push registry.gitlab.com/tienphc0512/greenhouse-labv2/main:latest
   rules:
     - changes:
         - main/*
