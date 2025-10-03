@@ -31,7 +31,7 @@ deploy_user_service:
     - apt-get install -y openssh-client
     - chmod 400 $SSH_PRIVATE_KEY
   script:
-    - ssh -i $SSH_PRIVATE_KEY -o StrictHostKeyChecking=no phengtin0512@35.247.188.150 "
+    - ssh -i $SSH_PRIVATE_KEY -o StrictHostKeyChecking=no phengtin0512@34.87.125.129 "
         echo $CI_JOB_TOKEN | docker login -u gitlab-ci-token --password-stdin registry.gitlab.com &&
         cd ~/greenhouse-lab &&
         docker compose pull user_service && 
@@ -60,7 +60,7 @@ deploy_plant_service:
     - apt-get install -y openssh-client
     - chmod 400 $SSH_PRIVATE_KEY
   script:
-    - ssh -i $SSH_PRIVATE_KEY -o StrictHostKeyChecking=no phengtin0512@35.247.188.150 "
+    - ssh -i $SSH_PRIVATE_KEY -o StrictHostKeyChecking=no phengtin0512@34.87.125.129 "
         echo $CI_JOB_TOKEN | docker login -u gitlab-ci-token --password-stdin registry.gitlab.com &&
         cd ~/greenhouse-lab &&
         docker compose pull plant_service &&
@@ -89,7 +89,7 @@ deploy_simulation_service:
     - apt-get install -y openssh-client
     - chmod 400 $SSH_PRIVATE_KEY
   script:
-    - ssh -i $SSH_PRIVATE_KEY -o StrictHostKeyChecking=no phengtin0512@35.247.188.150 "
+    - ssh -i $SSH_PRIVATE_KEY -o StrictHostKeyChecking=no phengtin0512@34.87.125.129 "
         echo $CI_JOB_TOKEN | docker login -u gitlab-ci-token --password-stdin registry.gitlab.com &&
         cd ~/greenhouse-lab &&
         docker compose pull simulation_service &&
@@ -118,7 +118,7 @@ deploy_websocket_service:
     - apt-get install -y openssh-client
     - chmod 400 $SSH_PRIVATE_KEY
   script:
-    - ssh -i $SSH_PRIVATE_KEY -o StrictHostKeyChecking=no phengtin0512@35.247.188.150 "
+    - ssh -i $SSH_PRIVATE_KEY -o StrictHostKeyChecking=no phengtin0512@34.87.125.129 "
         echo $CI_JOB_TOKEN | docker login -u gitlab-ci-token --password-stdin registry.gitlab.com &&
         cd ~/greenhouse-lab &&
         docker compose pull websocket_service &&
@@ -147,7 +147,7 @@ deploy_bug_service:
     - apt-get install -y openssh-client
     - chmod 400 $SSH_PRIVATE_KEY
   script:
-    - ssh -i $SSH_PRIVATE_KEY -o StrictHostKeyChecking=no phengtin0512@35.247.188.150 "
+    - ssh -i $SSH_PRIVATE_KEY -o StrictHostKeyChecking=no phengtin0512@34.87.125.129 "
         echo $CI_JOB_TOKEN | docker login -u gitlab-ci-token --password-stdin registry.gitlab.com &&
         cd ~/greenhouse-lab &&
         docker compose pull bug_service &&
@@ -176,7 +176,7 @@ deploy_main_app:
     - apt-get update && apt-get install -y openssh-client
     - chmod 400 $SSH_PRIVATE_KEY
   script:
-    - ssh -i $SSH_PRIVATE_KEY -o StrictHostKeyChecking=no phengtin0512@35.247.188.150 "
+    - ssh -i $SSH_PRIVATE_KEY -o StrictHostKeyChecking=no phengtin0512@34.87.125.129 "
         echo $CI_JOB_TOKEN | docker login -u gitlab-ci-token --password-stdin registry.gitlab.com &&
         cd ~/greenhouse-lab &&
         docker compose pull main_app &&
