@@ -177,7 +177,7 @@ deploy_main_app:
     - chmod 400 $SSH_PRIVATE_KEY
   script:
     - ssh -i $SSH_PRIVATE_KEY -o StrictHostKeyChecking=no phengtin0512@35.247.188.150 "
-        echo $CI_JOB_TOKEN | docker login -u gitlab-ci-token --password-stdin registry.gitlab.com &&
+        docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY &&
         cd ~/greenhouse-lab &&
         docker compose pull main_app &&
         docker compose up -d main_app
