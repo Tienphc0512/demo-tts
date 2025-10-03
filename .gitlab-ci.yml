@@ -16,8 +16,8 @@ before_script:
 build_user_service:
   stage: build
   script:
-    - docker build -t registry.gitlab.com/tienphc0512/greenhouse-lab/user_service:latest -f ./user_service/Dockerfile .
-    - docker push registry.gitlab.com/tienphc0512/greenhouse-lab/user_service:latest
+    - docker build -t registry.gitlab.com/tienphc0512/greenhouse-labV2/user_service:latest -f ./user_service/Dockerfile .
+    - docker push registry.gitlab.com/tienphc0512/greenhouse-labV2/user_service:latest
   rules:
     - changes: # và nếu là nhánh main thì chỉ chạy khi có thay đổi trong thư mục user_service
         - user_service/*
@@ -45,8 +45,8 @@ deploy_user_service:
 build_plant_service:
   stage: build
   script:
-    - docker build -t registry.gitlab.com/tienphc0512/greenhouse-lab/plant_service:latest -f ./plant_service/Dockerfile .
-    - docker push registry.gitlab.com/tienphc0512/greenhouse-lab/plant_service:latest
+    - docker build -t registry.gitlab.com/tienphc0512/greenhouse-labV2/plant_service:latest -f ./plant_service/Dockerfile .
+    - docker push registry.gitlab.com/tienphc0512/greenhouse-labV2/plant_service:latest
   rules:
     - changes:
         - plant_service/*
@@ -74,8 +74,8 @@ deploy_plant_service:
 build_simulation_service:
   stage: build
   script:
-    - docker build -t registry.gitlab.com/tienphc0512/greenhouse-lab/simulation_service:latest -f ./simulation_service/Dockerfile .
-    - docker push registry.gitlab.com/tienphc0512/greenhouse-lab/simulation_service:latest
+    - docker build -t registry.gitlab.com/tienphc0512/greenhouse-labV2/simulation_service:latest -f ./simulation_service/Dockerfile .
+    - docker push registry.gitlab.com/tienphc0512/greenhouse-labV2/simulation_service:latest
   rules:
     - changes:
         - simulation_service/*
@@ -103,8 +103,8 @@ deploy_simulation_service:
 build_websocket_service:
   stage: build
   script:
-    - docker build -t registry.gitlab.com/tienphc0512/greenhouse-lab/websocket_service:latest -f ./websocket_service/Dockerfile .
-    - docker push registry.gitlab.com/tienphc0512/greenhouse-lab/websocket_service:latest
+    - docker build -t registry.gitlab.com/tienphc0512/greenhouse-labV2/websocket_service:latest -f ./websocket_service/Dockerfile .
+    - docker push registry.gitlab.com/tienphc0512/greenhouse-labV2/websocket_service:latest
   rules:
     - changes:
         - websocket_service/*
@@ -132,8 +132,8 @@ deploy_websocket_service:
 build_bug_service:
   stage: build
   script:
-    - docker build -t registry.gitlab.com/tienphc0512/greenhouse-lab/bug_service:latest -f ./bug_service/Dockerfile .
-    - docker push registry.gitlab.com/tienphc0512/greenhouse-lab/bug_service:latest
+    - docker build -t registry.gitlab.com/tienphc0512/greenhouse-labV2/bug_service:latest -f ./bug_service/Dockerfile .
+    - docker push registry.gitlab.com/tienphc0512/greenhouse-labV2/bug_service:latest
   rules:
     - changes:
         - bug_service/*
@@ -161,8 +161,8 @@ deploy_bug_service:
 build_main_app:
   stage: build
   script:
-    - docker build -t registry.gitlab.com/tienphc0512/greenhouse-lab/main:latest -f ./Dockerfile .
-    - docker push registry.gitlab.com/tienphc0512/greenhouse-lab/main:latest
+    - docker build -t registry.gitlab.com/tienphc0512/greenhouse-labV2/main:latest -f ./Dockerfile .
+    - docker push registry.gitlab.com/tienphc0512/greenhouse-labV2/main:latest
   rules:
     - changes:
         - main/*
