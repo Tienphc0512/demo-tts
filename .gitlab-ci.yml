@@ -1,0 +1,201 @@
+stages:
+  - build
+  - deploy
+
+image: docker:latest
+
+services:
+  - docker:dind
+
+variables:
+  DOCKER_DRIVER: overlay2
+  
+before_script:
+  - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+
+build_user_service:
+  stage: build
+  script:
+    - docker build -t registry.gitlab.com/tienphc0512/greenhouse-lab/user_service:latest -f ./user_service/Dockerfile .
+    - docker push registry.gitlab.com/tienphc0512/greenhouse-lab/user_service:latest
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"' # chỉ buil và deploy khi commit vào nhánh main 
+      changes: # và nếu là nhánh main thì chỉ chạy khi có thay đổi trong thư mục user_service
+        - user_service/*
+        - user_service/**/*
+
+deploy_user_service:
+  stage: deploy
+  image: ubuntu:latest
+  before_script:
+    - apt-get update
+    - apt-get install -y openssh-client
+    - chmod 400 $SSH_PRIVATE_KEY
+  script:
+    - ssh -i $SSH_PRIVATE_KEY -o StrictHostKeyChecking=no phengtin0512@35.247.188.150 "
+        echo $CI_JOB_TOKEN | docker login -u gitlab-ci-token --password-stdin registry.gitlab.com &&
+        cd ~/greenhouse-lab &&
+        docker compose pull user_service && 
+        docker compose up -d user_service
+      "
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      changes:
+        - user_service/*
+        - user_service/**/*
+
+build_plant_service:
+  stage: build
+  script:
+    - docker build -t registry.gitlab.com/tienphc0512/greenhouse-lab/plant_service:latest -f ./plant_service/Dockerfile .
+    - docker push registry.gitlab.com/tienphc0512/greenhouse-lab/plant_service:latest
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      changes:
+        - plant_service/*
+        - plant_service/**/*
+
+deploy_plant_service:
+  stage: deploy
+  image: ubuntu:latest
+  before_script:
+    - apt-get update
+    - apt-get install -y openssh-client
+    - chmod 400 $SSH_PRIVATE_KEY
+  script:
+    - ssh -i $SSH_PRIVATE_KEY -o StrictHostKeyChecking=no phengtin0512@35.247.188.150 "
+        echo $CI_JOB_TOKEN | docker login -u gitlab-ci-token --password-stdin registry.gitlab.com &&
+        cd ~/greenhouse-lab &&
+        docker compose pull plant_service &&
+        docker compose up -d plant_service
+      "
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      changes:
+        - plant_service/*
+        - plant_service/**/*
+
+build_simulation_service:
+  stage: build
+  script:
+    - docker build -t registry.gitlab.com/tienphc0512/greenhouse-lab/simulation_service:latest -f ./simulation_service/Dockerfile .
+    - docker push registry.gitlab.com/tienphc0512/greenhouse-lab/simulation_service:latest
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      changes:
+        - simulation_service/*
+        - simulation_service/**/*
+
+deploy_simulation_service:
+  stage: deploy
+  image: ubuntu:latest
+  before_script:
+    - apt-get update
+    - apt-get install -y openssh-client
+    - chmod 400 $SSH_PRIVATE_KEY
+  script:
+    - ssh -i $SSH_PRIVATE_KEY -o StrictHostKeyChecking=no phengtin0512@35.247.188.150 "
+        echo $CI_JOB_TOKEN | docker login -u gitlab-ci-token --password-stdin registry.gitlab.com &&
+        cd ~/greenhouse-lab &&
+        docker compose pull simulation_service &&
+        docker compose up -d simulation_service
+      "
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      changes:
+        - simulation_service/*
+        - simulation_service/**/*
+
+build_websocket_service:
+  stage: build
+  script:
+    - docker build -t registry.gitlab.com/tienphc0512/greenhouse-lab/websocket_service:latest -f ./websocket_service/Dockerfile .
+    - docker push registry.gitlab.com/tienphc0512/greenhouse-lab/websocket_service:latest
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      changes:
+        - websocket_service/*
+        - websocket_service/**/*
+
+deploy_websocket_service:
+  stage: deploy
+  image: ubuntu:latest
+  before_script:
+    - apt-get update
+    - apt-get install -y openssh-client
+    - chmod 400 $SSH_PRIVATE_KEY
+  script:
+    - ssh -i $SSH_PRIVATE_KEY -o StrictHostKeyChecking=no phengtin0512@35.247.188.150 "
+        echo $CI_JOB_TOKEN | docker login -u gitlab-ci-token --password-stdin registry.gitlab.com &&
+        cd ~/greenhouse-lab &&
+        docker compose pull websocket_service &&
+        docker compose up -d websocket_service
+      "
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      changes:
+        - websocket_service/*
+        - websocket_service/**/*
+
+build_bug_service:
+  stage: build
+  script:
+    - docker build -t registry.gitlab.com/tienphc0512/greenhouse-lab/bug_service:latest -f ./bug_service/Dockerfile .
+    - docker push registry.gitlab.com/tienphc0512/greenhouse-lab/bug_service:latest
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      changes:
+        - bug_service/*
+        - bug_service/**/*
+
+deploy_bug_service:
+  stage: deploy
+  image: ubuntu:latest
+  before_script:
+    - apt-get update
+    - apt-get install -y openssh-client
+    - chmod 400 $SSH_PRIVATE_KEY
+  script:
+    - ssh -i $SSH_PRIVATE_KEY -o StrictHostKeyChecking=no phengtin0512@35.247.188.150 "
+        echo $CI_JOB_TOKEN | docker login -u gitlab-ci-token --password-stdin registry.gitlab.com &&
+        cd ~/greenhouse-lab &&
+        docker compose pull bug_service &&
+        docker compose up -d bug_service
+      "
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      changes:
+        - bug_service/*
+        - bug_service/**/*
+
+build_main_app:
+  stage: build
+  script:
+    - docker build -t registry.gitlab.com/tienphc0512/greenhouse-lab/main:latest -f ./Dockerfile .
+    - docker push registry.gitlab.com/tienphc0512/greenhouse-lab/main:latest
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      changes:
+        - main/*
+        - main/**/*
+        - Dockerfile
+
+deploy_main_app:
+  stage: deploy
+  image: ubuntu:latest
+  before_script:
+    - apt-get update && apt-get install -y openssh-client
+    - chmod 400 $SSH_PRIVATE_KEY
+  script:
+    - ssh -i $SSH_PRIVATE_KEY -o StrictHostKeyChecking=no phengtin0512@35.247.188.150 "
+        echo $CI_JOB_TOKEN | docker login -u gitlab-ci-token --password-stdin registry.gitlab.com &&
+        cd ~/greenhouse-lab &&
+        docker compose pull main_app &&
+        docker compose up -d main_app
+      "
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      changes:
+        - main/*
+        - main/**/*
+        - Dockerfile
