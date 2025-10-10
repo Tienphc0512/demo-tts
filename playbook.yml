@@ -1,0 +1,102 @@
+---
+- hosts: webserver
+  become: yes
+  vars_files:
+    - config.yml
+
+  tasks:
+    - name: Update system
+      apt:
+        update_cache: yes
+
+    - name: Install required packages
+      apt:
+        name:
+          - nginx
+          - mysql-client
+          - php-fpm
+          - php-mysql
+          - unzip
+          - curl
+        state: present
+
+    - name: Download WordPress
+      get_url:
+        url: https://wordpress.org/latest.zip
+        dest: /tmp/wordpress.zip
+
+    - name: Extract WordPress
+      unarchive:
+        src: /tmp/wordpress.zip
+        dest: /var/www/
+        remote_src: yes
+
+    - name: Configure wp-config.php
+      copy:
+        dest: /var/www/wordpress/wp-config.php
+        content: |
+          <?php
+          define( 'DB_NAME', '{{ db_name }}' );
+          define( 'DB_USER', '{{ db_user }}' );
+          define( 'DB_PASSWORD', '{{ db_password }}' );
+          define( 'DB_HOST', '{{ db_host }}' );
+          define( 'DB_CHARSET', 'utf8' );
+          define( 'DB_COLLATE', '' );
+          define( 'AUTH_KEY',         'put your unique phrase here' );
+          define( 'SECURE_AUTH_KEY',  'put your unique phrase here' );
+          define( 'LOGGED_IN_KEY',    'put your unique phrase here' );
+          define( 'NONCE_KEY',        'put your unique phrase here' );
+          define( 'AUTH_SALT',        'put your unique phrase here' );
+          define( 'SECURE_AUTH_SALT', 'put your unique phrase here' );
+          define( 'LOGGED_IN_SALT',   'put your unique phrase here' );
+          define( 'NONCE_SALT',       'put your unique phrase here' );
+          $table_prefix = 'wp_';
+          define( 'WP_DEBUG', false );
+          if ( ! defined( 'ABSPATH' ) ) {
+              define( 'ABSPATH', __DIR__ . '/' );
+          }
+          require_once ABSPATH . 'wp-settings.php';
+          ?>
+
+    - name: Set correct permissions
+      file:
+        path: /var/www/wordpress
+        owner: www-data
+        group: www-data
+        recurse: yes
+
+    - name: Configure Nginx site
+      copy:
+        dest: /etc/nginx/sites-available/wordpress
+        content: |
+          server {
+              listen 80;
+              server_name _;
+              root /var/www/wordpress;
+              index index.php index.html;
+              
+              location / {
+                  try_files $uri $uri/ /index.php?$args;
+              }
+
+              location ~ \.php$ {
+                  include snippets/fastcgi-php.conf;
+                  fastcgi_pass unix:/run/php/php8.1-fpm.sock;
+              }
+
+              location ~ /\.ht {
+                  deny all;
+              }
+          }
+
+    - name: Enable site
+      file:
+        src: /etc/nginx/sites-available/wordpress
+        dest: /etc/nginx/sites-enabled/wordpress
+        state: link
+        force: yes
+
+    - name: Restart Nginx
+      systemd:
+        name: nginx
+        state: restarted
